@@ -49,7 +49,11 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  database: protospace_46344_production
-  username: protospace_46344
-  password: <%= ENV["PROTOSPACE_46344_DATABASE_PASSWORD"] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: <%= ENV["DATABASE_NAME"] || "protospace_46344_production" %>
+  username: <%= ENV["DATABASE_USER"] || "protospace_46344" %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
+  host: <%= ENV["DATABASE_HOST"] || "localhost" %>
+  port: <%= ENV["DATABASE_PORT"] || 5432 %>
